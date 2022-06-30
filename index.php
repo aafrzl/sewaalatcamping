@@ -150,7 +150,7 @@ $aksi = @$_GET['aksi'];
                         <div class="container-flud">
                             <div class="col-md-6">
                                 <h6>Belum bisa transaksi</h6>
-                                <a href="" class="btn btn-primary btn-sm"><i class="fa fa-arrow-down mr-1"></i>Download source codenya disini.</a>
+                                <a href="https://github.com/aafrzl/sewaalatcamping" target="_blank" class="btn btn-primary btn-sm"><i class="fa fa-arrow-down mr-1"></i>Download source codenya disini.</a>
                             </div>
                         </div>
                     <?php
