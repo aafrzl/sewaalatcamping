@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 30, 2022 at 04:57 AM
+-- Generation Time: Jul 01, 2022 at 02:17 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `sewaalatcamping`
+-- Database: `db_sewaalatcamping`
 --
 
 -- --------------------------------------------------------
@@ -44,7 +44,7 @@ INSERT INTO `tb_barang` (`idbarang`, `namabarang`, `harga`, `jumlah_barang`) VAL
 (2, 'Great Outdoor Sharp ', 100000, 10),
 (3, 'Rock Dinamcs X-Frame', 120000, 5),
 (4, 'Eiger Transformer 2', 250000, 10),
-(5, 'Merapi Mountain Milk', 170000, 15),
+(5, 'Merapi Mountain Milk', 170000, 13),
 (6, 'Tenda Canopi', 155000, 6),
 (7, 'Great Outdoor Explor', 130000, 4),
 (8, 'Lafuma Campo 2', 230000, 7),
@@ -53,7 +53,7 @@ INSERT INTO `tb_barang` (`idbarang`, `namabarang`, `harga`, `jumlah_barang`) VAL
 (11, 'Consina Magnum 4', 150000, 10),
 (12, 'Great Outdoor Fly ai', 180000, 5),
 (13, 'Tenda Dome Pawon', 184000, 10),
-(14, 'Great Outdoor Camp 4', 182000, 15),
+(14, 'Great Outdoor Camp 4', 182000, 16),
 (15, 'BNIX BN-0 12', 210000, 10),
 (16, 'Bnix Bn-005', 270000, 2),
 (17, 'Tenda Dome Od Tend', 350000, 3),
@@ -65,7 +65,7 @@ INSERT INTO `tb_barang` (`idbarang`, `namabarang`, `harga`, `jumlah_barang`) VAL
 (23, 'Deuter Futura 22 L', 310000, 5),
 (24, 'Daypack Consina MC K', 310000, 2),
 (25, 'Daypack Consina Leba', 190000, 5),
-(26, 'Jayagiri BP 40 L', 240000, 26),
+(26, 'Jayagiri BP 40 L', 240000, 20),
 (27, 'Jayagiri Amazon 24 4', 240000, 10),
 (28, 'Jayagiri Amazon 23 4', 240000, 5),
 (29, 'Eiger Gekkota 45 L', 240000, 3),
@@ -80,10 +80,10 @@ INSERT INTO `tb_barang` (`idbarang`, `namabarang`, `harga`, `jumlah_barang`) VAL
 (38, 'Ransel Rangka 60 L', 350000, 9),
 (39, 'Drone Rangger 60 L', 310000, 10),
 (40, 'Gravell Catmount 60 ', 310000, 12),
-(41, 'Gravell Sangkareang ', 190000, 13),
+(41, 'Gravell Sangkareang ', 190000, 11),
 (42, 'Luxor', 1000000, 14),
 (43, 'Giant 60 L', 240000, 16),
-(44, 'Drone Excalibur 60 L', 240000, 17),
+(44, 'Drone Excalibur 60 L', 240000, 16),
 (45, 'Consina Alpinnist 75', 240000, 5),
 (46, 'Zebra Wall Mammoth 7', 240000, 3),
 (47, 'Consina Expedition 7', 240000, 5),
@@ -100,11 +100,21 @@ INSERT INTO `tb_barang` (`idbarang`, `namabarang`, `harga`, `jumlah_barang`) VAL
 
 CREATE TABLE `tb_detailsewa` (
   `iddetailsewa` int(11) NOT NULL,
-  `idsewa` int(11) NOT NULL,
-  `idbarang` int(5) NOT NULL,
+  `idsewa` int(11) DEFAULT NULL,
+  `idbarang` int(5) DEFAULT NULL,
   `jumlah` int(10) NOT NULL,
   `subharga` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_detailsewa`
+--
+
+INSERT INTO `tb_detailsewa` (`iddetailsewa`, `idsewa`, `idbarang`, `jumlah`, `subharga`) VALUES
+(1, 2, 26, 1, 240000),
+(4, 6, 26, 1, 240000),
+(5, 6, 14, 1, 182000),
+(7, 8, 26, 1, 240000);
 
 -- --------------------------------------------------------
 
@@ -135,14 +145,23 @@ INSERT INTO `tb_pelanggan` (`idpelanggan`, `nama_pelanggan`, `alamat`, `tgl_lahi
 
 CREATE TABLE `tb_penyewaan` (
   `idsewa` int(11) NOT NULL,
-  `iduser` int(11) NOT NULL,
-  `idpelanggan` int(11) NOT NULL,
+  `iduser` int(11) DEFAULT NULL,
+  `idpelanggan` int(11) DEFAULT NULL,
   `tanggalsewa` date NOT NULL,
   `tanggalkembali` date NOT NULL,
   `denda` int(20) NOT NULL,
   `total` int(20) NOT NULL,
   `status` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_penyewaan`
+--
+
+INSERT INTO `tb_penyewaan` (`idsewa`, `iduser`, `idpelanggan`, `tanggalsewa`, `tanggalkembali`, `denda`, `total`, `status`) VALUES
+(2, 60, 2, '2022-07-01', '2022-07-04', 0, 240000, 'sewa'),
+(6, 60, 2, '2022-07-01', '2022-07-05', 0, 422000, 'sewa'),
+(8, 60, 2, '2022-05-05', '2022-06-06', 125000, 240000, 'kembali');
 
 -- --------------------------------------------------------
 
@@ -163,7 +182,7 @@ CREATE TABLE `tb_user` (
 --
 
 INSERT INTO `tb_user` (`iduser`, `username`, `password`, `nama`, `foto`) VALUES
-(60, 'admin', '$2y$10$dMEDV6kt8cIWZ', 'Afrizal Mufriz Fouji', '62bae745eb877.jpg'),
+(60, 'admin', '$2y$10$jrFJc9WMoFoDFiw.wTvLoe38Xj26BVuP2hIyEtMEZEG37PwPrzs3.', 'Admin', '62bae745eb877.jpg'),
 (61, 'aafrzl_', '$2y$10$jrFJc9WMoFoDFiw.wTvLoe38Xj26BVuP2hIyEtMEZEG37PwPrzs3.', 'Afrizal Mufriz Fouji', '62baea2022307.jpg');
 
 --
@@ -195,8 +214,8 @@ ALTER TABLE `tb_pelanggan`
 --
 ALTER TABLE `tb_penyewaan`
   ADD PRIMARY KEY (`idsewa`),
-  ADD UNIQUE KEY `idpegawai` (`iduser`),
-  ADD KEY `idpelanggan` (`idpelanggan`);
+  ADD KEY `idpelanggan` (`idpelanggan`),
+  ADD KEY `iduser` (`iduser`) USING BTREE;
 
 --
 -- Indexes for table `tb_user`
@@ -209,34 +228,16 @@ ALTER TABLE `tb_user`
 --
 
 --
--- AUTO_INCREMENT for table `tb_barang`
---
-ALTER TABLE `tb_barang`
-  MODIFY `idbarang` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
-
---
 -- AUTO_INCREMENT for table `tb_detailsewa`
 --
 ALTER TABLE `tb_detailsewa`
-  MODIFY `iddetailsewa` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `tb_pelanggan`
---
-ALTER TABLE `tb_pelanggan`
-  MODIFY `idpelanggan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `iddetailsewa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tb_penyewaan`
 --
 ALTER TABLE `tb_penyewaan`
-  MODIFY `idsewa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
-
---
--- AUTO_INCREMENT for table `tb_user`
---
-ALTER TABLE `tb_user`
-  MODIFY `iduser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `idsewa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
@@ -253,8 +254,8 @@ ALTER TABLE `tb_detailsewa`
 -- Constraints for table `tb_penyewaan`
 --
 ALTER TABLE `tb_penyewaan`
-  ADD CONSTRAINT `tb_penyewaan_ibfk_2` FOREIGN KEY (`idpelanggan`) REFERENCES `tb_pelanggan` (`idpelanggan`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tb_penyewaan_ibfk_3` FOREIGN KEY (`iduser`) REFERENCES `tb_user` (`iduser`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `tb_penyewaan_ibfk_1` FOREIGN KEY (`idpelanggan`) REFERENCES `tb_pelanggan` (`idpelanggan`),
+  ADD CONSTRAINT `tb_penyewaan_ibfk_2` FOREIGN KEY (`iduser`) REFERENCES `tb_user` (`iduser`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

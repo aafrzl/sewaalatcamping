@@ -19,7 +19,7 @@ function terlambat($tgl_dateline, $tgl_kembali) {
 }
 
 function setDenda($denda, $idsewa) {
-	require_once 'koneksi.php';
+	require_once './config/koneksi.php';
 
 	$conn->query("UPDATE tb_penyewaan SET denda = $denda WHERE idsewa = $idsewa") or die(mysqli_error($conn));
 }

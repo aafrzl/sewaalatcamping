@@ -135,10 +135,12 @@ $aksi = @$_GET['aksi'];
                             require_once 'page/transaksi/tambah.php';
                         } else if ($aksi == 'kembali') {
                             require_once 'page/transaksi/kembali.php';
-                        } else if ($aksi == 'perpanjang') {
-                            require_once 'page/transaksi/perpanjang.php';
+                        } else if ($aksi == 'detail') {
+                            require_once 'page/transaksi/detailtransaksi.php';
                         } else if ($aksi == 'pilih') {
                             require_once('page/transaksi/pilihbarang.php');
+                        } else if ($aksi == 'simpan') {
+                            require_once('page/transaksi/simpan.php');
                         }
                     } else { ?>
                         <ol class="breadcrumb mb-4 mt-4">

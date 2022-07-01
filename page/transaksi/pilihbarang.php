@@ -7,6 +7,7 @@ $tampilBarang = $conn->query("SELECT * FROM tb_barang ORDER BY jumlah_barang DES
 <h1 class="mt-4">Pilih barang</h1>
 <ol class="breadcrumb mb-4">
     <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
+    <li class="breadcrumb-item"><a href="?p=transaksi">Data Transaksi</a></li>
     <li class="breadcrumb-item active">Pilih Barang</li>
 </ol>
 <div class="card mb-4">
@@ -23,6 +24,7 @@ $tampilBarang = $conn->query("SELECT * FROM tb_barang ORDER BY jumlah_barang DES
                         <th>Nama Barang</th>
                         <th>Harga</th>
                         <th>Stok</th>
+                        <th>Jumlah</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -35,12 +37,18 @@ $tampilBarang = $conn->query("SELECT * FROM tb_barang ORDER BY jumlah_barang DES
                             <td><?= $no++; ?></td>
                             <td><?= $data['namabarang']; ?></td>
                             <td>Rp. <?= number_format($data['harga']); ?></td>
-                            <td><?= $data['jumlah_barang'];?>
+                            <td><?= $data['jumlah_barang']; ?></td>
+                            <td width="106">
+                                <form name="form" method="POST" action="?p=transaksi&aksi=tambah">
+                                    <input type="hidden" name="idbarang" value="<?= $data['idbarang']; ?>"></input>
+                                    <input class="form-control form-control-sm" type="number" id="jumlah" name="jumlah" value="1" min="1" max="<?= $data['jumlah_barang']; ?>">
                             </td>
                             <td>
-                                <a href="?p=transaksi&aksi=tambah&idbarang=<?= $data['idbarang'] ?>" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
+                                <button class="btn btn-primary btn-sm" type="submit" name="submit">
+                                    <i class="fa fa-plus"></i>
                             </td>
                         </tr>
+                        </form>
                     <?php } ?>
                 </tbody>
             </table>
