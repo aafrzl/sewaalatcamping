@@ -112,8 +112,8 @@ if (!empty($_SESSION['cart'])) {
                             <td colspan="2" align="left"><strong>Rp. <?= number_format($total_bayar); ?></strong></td>
                         </tr>
                         <div class="form-group">
-                            <label class="small mb-1" for="nama_pelanggan">Nama</label>
-                            <select name="nama" id="nama_pelanggan" class="form-control">
+                            <label class="small mb-1" for="nama_pelanggan">Nama Pelanggan</label>
+                            <select name="nama" id="nama_pelanggan" class="form-control" required>
                                 <option value="">-- Pilih Pelanggan --</option>
                                 <?php
                                 while ($dataPelanggan = $tampilkanNamaPelanggan->fetch_assoc()) {
@@ -124,11 +124,11 @@ if (!empty($_SESSION['cart'])) {
                         </div>
                         <div class="form-group">
                             <label for="tgl_sewa">Tanggal Sewa</label>
-                            <input type="date" name="tgl_sewa" id="tgl_sewa" class="form-control">
+                            <input type="date" name="tgl_sewa" id="tgl_sewa" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label for="tgl_kembali">Tanggal Kembali</label>
-                            <input type="date" name="tgl_kembali" id="tgl_kembali" class="form-control">
+                            <input type="date" name="tgl_kembali" id="tgl_kembali" class="form-control" required>
                         </div>
                     </table>
                 </div>

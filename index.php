@@ -41,6 +41,8 @@ $aksi = @$_GET['aksi'];
         } else if ($page == 'transaksi') {
             if ($aksi == 'tambah') {
                 echo "Tambah Transaksi";
+            } else if ($aksi == 'pilih') {
+                echo "Pilih barang";
             } else {
                 echo "Halaman Transaksi";
             }
@@ -57,8 +59,8 @@ $aksi = @$_GET['aksi'];
 
 <body>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-        <a class="navbar-brand" href="index.php">MOUNTAINESIA RENT</a>
-        <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
+        <a class="navbar-brand" href="index.php"><i class="fas fa-mountain mr-2"></i>MOUNTAINESIA RENT</a>
+        <button class="btn btn-link btn-sm order-1 order-lg-0 ml-5" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
         <!-- Navbar-->
         <ul class="navbar-nav ml-auto mr-0 mr-md-3 my-2 my-md-0 pb-2">
             <li class="nav-item dropdown">
@@ -83,15 +85,15 @@ $aksi = @$_GET['aksi'];
                         </a>
                         <div class="sb-sidenav-menu-heading">Data Penyewaan</div>
                         <a class="nav-link" href="?p=pelanggan">
-                            <div class="sb-nav-link-icon"><i class="fa fa-users" aria-hidden="true"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-users" aria-hidden="true"></i></div>
                             Data Pelanggan
                         </a>
                         <a class="nav-link" href="?p=barang">
-                            <div class="sb-nav-link-icon"><i class="fa fa-book" aria-hidden="true"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-boxes" aria-hidden="true"></i></div>
                             Data Barang
                         </a>
                         <a class="nav-link" href="?p=transaksi">
-                            <div class="sb-nav-link-icon"><i class="fa fa-handshake" aria-hidden="true"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-hands-helping" aria-hidden="true"></i></div>
                             Transaksi Penyewaan
                         </a>
                     </div>
@@ -151,7 +153,6 @@ $aksi = @$_GET['aksi'];
                         </ol>
                         <div class="container-flud">
                             <div class="col-md-6">
-                                <h6>Belum bisa transaksi</h6>
                                 <a href="https://github.com/aafrzl/sewaalatcamping" target="_blank" class="btn btn-primary btn-sm"><i class="fa fa-arrow-down mr-1"></i>Download source codenya disini.</a>
                             </div>
                         </div>
@@ -169,13 +170,15 @@ $aksi = @$_GET['aksi'];
             </footer>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="js/scripts.js"></script>
     <script src="js/deleteDialog.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
     <script src="assets/demo/datatables-demo.js"></script>
+    <script src="js/datepicker.js"></script>
 </body>
 
 </html>

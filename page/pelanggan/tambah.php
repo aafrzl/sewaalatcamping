@@ -5,7 +5,7 @@ if(isset($_POST['tambah'])) {
 	$tgl_lahir = htmlspecialchars($_POST['tgl_lahir']);
 	$jk = htmlspecialchars($_POST['jk']);
 
-    if(empty($nama && $alamat && $tgl_lahir && $jk)) {
+    if(empty($nama_pelanggan && $alamat && $tgl_lahir && $jk)) {
         echo "<script>swal('Pastikan anda sudah mengisi semua formulir', {
             icon: 'error',
         }).then((willUpdate) => {if(willUpdate) {window.location='?p=pelanggan';}} );</script>";
@@ -35,24 +35,24 @@ if(isset($_POST['tambah'])) {
 	<form action="" method="post">
     <div class="form-group">
         <label class="small mb-1" for="nama_pelanggan">Nama Pelanggan</label>
-        <input class="form-control" id="nama_pelanggan" name="nama_pelanggan" type="text" placeholder="Masukkan nama pelanggan"/>
+        <input class="form-control" id="nama_pelanggan" name="nama_pelanggan" type="text" placeholder="Masukkan nama pelanggan" required/>
     </div>
     <div class="form-group">
         <label class="small mb-1" for="alamat">Alamat</label>
-        <textarea class="form-control" id="alamat" name="alamat" rows="3" placeholder="Masukkan alamat pelanggan"/></textarea>
+        <textarea class="form-control" id="alamat" name="alamat" rows="3" placeholder="Masukkan alamat pelanggan" required/></textarea>
     </div>
     <div class="form-group">
         <label class="small mb-1" for="tgl_lahir">Tanggal Lahir</label>
-        <input type="date" name="tgl_lahir" id="tgl_lahir" class="form-control">
+        <input type="date" name="tgl_lahir" id="tgl_lahir" class="form-control" required>
     </div>
     <div class="form-group">
         <label class="small mb-1" for="jk">Jenis Kelamin</label>
         <div class="custom-control custom-radio">
-          <input type="radio" id="customRadio1" name="jk" value="L" class="custom-control-input">
+          <input type="radio" id="customRadio1" name="jk" value="L" class="custom-control-input" required>
           <label class="custom-control-label" for="customRadio1">Laki-Laki</label>
         </div>
         <div class="custom-control custom-radio">
-          <input type="radio" id="customRadio2" name="jk" class="custom-control-input" value="P">
+          <input type="radio" id="customRadio2" name="jk" class="custom-control-input" value="P" required>
           <label class="custom-control-label" for="customRadio2">Perempuan</label>
         </div>
     </div>

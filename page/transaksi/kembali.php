@@ -3,7 +3,7 @@
 $id_sewa = $_GET['idsewa'];
 $denda1 = $_GET['denda1'];
 
-$conn->query("UPDATE tb_penyewaan SET status = 'kembali', denda = '$denda1' WHERE idsewa = $id_sewa") or die(mysqli_error($conn));
+$conn->query("UPDATE tb_penyewaan SET status = 'kembali', denda = '$denda1', total = (total + $denda1) WHERE idsewa = $id_sewa") or die(mysqli_error($conn));
 
 $mysql = $conn->query("SELECT * FROM tb_detailsewa WHERE idsewa = $id_sewa") or die(mysqli_error($conn));
 

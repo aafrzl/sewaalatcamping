@@ -7,7 +7,7 @@ function confirmation(text) {
     dangerMode: true,
   }).then((willDelete) => {
     if (willDelete) {
-      window.location=text;
+      window.location = text;
     } else {
       swal({
         title: 'Data batal di hapus',

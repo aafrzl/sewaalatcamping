@@ -34,15 +34,15 @@ if(isset($_POST['tambah'])) {
 	<form action="" method="post">
     <div class="form-group">
         <label class="small mb-1" for="nama_barang">Nama Barang</label>
-        <input class="form-control" id="nama_barang" name="nama_barang" type="text" placeholder="Masukan Nama Barang"/>
+        <input class="form-control" id="nama_barang" name="nama_barang" type="text" placeholder="Masukan Nama Barang" required/>
     </div>
     <div class="form-group">
         <label class="small mb-1" for="harga_barang">Harga Barang</label>
-        <input class="form-control" id="harga_barang" name="harga_barang" type="text" placeholder="Masukan Harga Barang"/>
+        <input class="form-control" id="harga_barang" name="harga_barang" type="text" placeholder="Masukan Harga Barang" required/>
     </div>
     <div class="form-group">
         <label class="small mb-1" for="jumlah_barang">Jumlah Barang</label>
-        <input class="form-control" id="jumlah_barang" name="jumlah_barang" type="text" placeholder="Masukan Jumlah Barang"/>
+        <input class="form-control" id="jumlah_barang" name="jumlah_barang" type="number" min="1" placeholder="Masukan Jumlah Barang" required/>
     </div>
     <div class="form-group">
     	<button type="submit" class="btn btn-primary" name="tambah">Tambah Data</button>

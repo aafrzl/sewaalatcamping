@@ -6,7 +6,6 @@ $filename = "pelanggan_excel-(". date('d-m-Y') .").xls";
 header("Content-type: application/vnd-ms-excel");
 header("Content-Disposition: attachment; filename=$filename");
 
-// menampilkan DB buku
 $ambilPelanggan = $conn->query("SELECT * FROM tb_pelanggan ORDER BY idpelanggan DESC") or die(mysqli_error($conn));
 
 ?>

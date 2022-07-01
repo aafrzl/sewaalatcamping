@@ -83,7 +83,7 @@ if (isset($_SESSION['pesan'])) {
                                 ?>
                             </td>
                             <td><?= $pecah['status']; ?></td>
-                            <td><?= $pecah['total']; ?></td>
+                            <td><?= $pecah['total'] + $denda1; ?></td>
                             <td>
                                 <a href="?p=transaksi&aksi=kembali&idsewa=<?= $pecah['idsewa']; ?>&denda1=<?= $denda1?>" class="btn btn-info btn-sm"><i class="fas fa-undo mr-2"></i>Kembali Barang</a>
 
