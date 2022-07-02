@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 02 Jul 2022 pada 02.55
+-- Waktu pembuatan: 02 Jul 2022 pada 04.22
 -- Versi server: 10.4.24-MariaDB
 -- Versi PHP: 7.4.29
 
@@ -186,7 +186,8 @@ CREATE TABLE `tb_user` (
 
 INSERT INTO `tb_user` (`iduser`, `username`, `password`, `nama`, `foto`) VALUES
 (60, 'admin', '$2y$10$jrFJc9WMoFoDFiw.wTvLoe38Xj26BVuP2hIyEtMEZEG37PwPrzs3.', 'Admin', '62bae745eb877.jpg'),
-(61, 'aafrzl_', '$2y$10$jrFJc9WMoFoDFiw.wTvLoe38Xj26BVuP2hIyEtMEZEG37PwPrzs3.', 'Afrizal Mufriz Fouji', '62baea2022307.jpg');
+(61, 'aafrzl_', '$2y$10$jrFJc9WMoFoDFiw.wTvLoe38Xj26BVuP2hIyEtMEZEG37PwPrzs3.', 'Afrizal Mufriz Fouji', '62baea2022307.jpg'),
+(62, 'rizal', '$2y$10$iLxww36Nb98.xXUc0W1Aoe8E9eIyPOFZizhCFpPZ.C7Cmfdi47VM2', 'Rizal', '62bfabdc6cd41.png');
 
 --
 -- Indexes for dumped tables
@@ -255,6 +256,12 @@ ALTER TABLE `tb_penyewaan`
   MODIFY `idsewa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
+-- AUTO_INCREMENT untuk tabel `tb_user`
+--
+ALTER TABLE `tb_user`
+  MODIFY `iduser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+
+--
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
@@ -269,8 +276,8 @@ ALTER TABLE `tb_detailsewa`
 -- Ketidakleluasaan untuk tabel `tb_penyewaan`
 --
 ALTER TABLE `tb_penyewaan`
-  ADD CONSTRAINT `tb_penyewaan_ibfk_1` FOREIGN KEY (`idpelanggan`) REFERENCES `tb_pelanggan` (`idpelanggan`),
-  ADD CONSTRAINT `tb_penyewaan_ibfk_2` FOREIGN KEY (`iduser`) REFERENCES `tb_user` (`iduser`);
+  ADD CONSTRAINT `detail_bahan_ibfk_2` FOREIGN KEY (`iduser`) REFERENCES `tb_user` (`iduser`),
+  ADD CONSTRAINT `tb_penyewaan_ibfk_1` FOREIGN KEY (`idpelanggan`) REFERENCES `tb_pelanggan` (`idpelanggan`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
