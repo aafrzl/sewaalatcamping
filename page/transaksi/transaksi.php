@@ -1,5 +1,6 @@
 <?php
-require_once 'function.php';
+require_once './config/functions.php';
+
 
 $sql = $conn->query("SELECT * FROM tb_penyewaan INNER JOIN tb_pelanggan 
 										ON tb_penyewaan.idpelanggan = tb_pelanggan.idpelanggan 

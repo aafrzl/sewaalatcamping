@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once 'config/koneksi.php';
+require_once 'config/functions.php';
 
 if (!isset($_SESSION['login'])) {
     header("Location: login.php");
@@ -63,15 +64,24 @@ $aksi = @$_GET['aksi'];
         <button class="btn btn-link btn-sm order-1 order-lg-0 ml-5" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
         <!-- Navbar-->
         <ul class="navbar-nav ml-auto mr-0 mr-md-3 my-2 my-md-0 pb-2">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="rounded-circle profil" src="<?php echo "assets/img/" . $_SESSION['login']['foto'] ?>"></img></a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                    <p class="dropdown-item"><strong><?= $_SESSION['login']['nama']; ?></strong></p>
+            <li class="nav-item dropdown no-arrow">
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="mr-2 d-none d-lg-inline text-white-600 small"><?= $_SESSION['login']['nama']; ?></span>
+                    <img class="img-profile rounded-circle profil" src="<?php echo "assets/img/" . $_SESSION['login']['foto'] ?>">
+                </a>
+                <!-- Dropdown - User Information -->
+                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                    <a class="dropdown-item" href="#">
+                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Profile
+                    </a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="logout.php">Keluar</a>
+                    <a class="dropdown-item" href="logout.php" data-toggle="modal" data-target="#logoutModal">
+                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Logout
+                    </a>
                 </div>
             </li>
-        </ul>
     </nav>
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
@@ -154,6 +164,148 @@ $aksi = @$_GET['aksi'];
                         <div class="container-flud">
                             <div class="col-md-6">
                                 <a href="https://github.com/aafrzl/sewaalatcamping" target="_blank" class="btn btn-primary btn-sm"><i class="fa fa-arrow-down mr-1"></i>Download source codenya disini.</a>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-3 col-md-6 mb-4 mt-4">
+                                    <div class="card border-left-primary shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="text-xs font-weight-bold text-gray-600 text-uppercase mb-1">
+                                                        Jumlah Pelanggan Penyewaan</div>
+                                                    <div class="h2 mb-0 font-weight-bold text-gray-800">
+                                                        <?php
+                                                        $jumlahPelanggan = $conn->query("SELECT count(idpelanggan) FROM tb_pelanggan") or die(mysqli_error($conn));
+                                                        $dataPelanggan = mysqli_fetch_row($jumlahPelanggan);
+                                                        echo "$dataPelanggan[0]";
+                                                        ?>
+                                                    </div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-user fa-2x text-gray-300"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-6 mb-4 mt-4">
+                                    <div class="card border-left-primary shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="text-xs font-weight-bold text-gray-600 text-uppercase mb-1">
+                                                        Jumlah Barang Tersedia</div>
+                                                    <div class="h2 mb-0 font-weight-bold text-gray-800">
+                                                        <?php
+                                                        $jumlahBarang = $conn->query("SELECT count(idbarang) FROM tb_barang WHERE jumlah_barang > 0") or die(mysqli_error($conn));
+                                                        $dataBarang = mysqli_fetch_row($jumlahBarang);
+                                                        echo "$dataBarang[0]";
+                                                        ?>
+                                                    </div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-boxes fa-2x text-gray-300"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-6 mb-4 mt-4">
+                                    <div class="card border-left-primary shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="text-xs font-weight-bold text-gray-600 text-uppercase mb-1">
+                                                        Total Seluruh Pendapatan</div>
+                                                    <div class="h2 mb-0 font-weight-bold text-gray-800">
+                                                        <?php
+                                                        $total = $conn->query("SELECT SUM(total) FROM tb_penyewaan") or die(mysqli_error($conn));
+                                                        $dataTotal = mysqli_fetch_row($total);
+                                                        $totalPendapatanformat = number_format($dataTotal[0]);
+                                                        echo "Rp. $totalPendapatanformat";
+                                                        ?>
+                                                    </div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-money-bill fa-2x text-gray-300"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mb-4 p-4">
+                                <div class="card-header">
+                                    <i class="fas fa-table mr-1"></i>
+                                    Data Transaksi Selesai
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>Nama Petugas</th>
+                                                    <th>Nama Pelanggan</th>
+                                                    <th>Tanggal Pinjam</th>
+                                                    <th>Tanggal Kembali</th>
+                                                    <th>Keterlambatan</th>
+                                                    <th>Status</th>
+                                                    <th>Total Bayar</th>
+                                                    <th>Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                $no = 1;
+
+                                                $sql = $conn->query("SELECT * FROM tb_penyewaan INNER JOIN tb_pelanggan 
+                                                ON tb_penyewaan.idpelanggan = tb_pelanggan.idpelanggan 
+                                                INNER JOIN tb_user ON tb_penyewaan.iduser = tb_user.iduser
+                                                WHERE status = 'kembali'
+                                                ") or die(mysqli_error($conn));
+
+                                                while ($pecah = $sql->fetch_assoc()) {
+                                                    $idsewa = $pecah['idsewa'];
+                                                ?>
+                                                    <tr>
+                                                        <td><?= $no++; ?></td>
+                                                        <td><?= $pecah['nama']; ?></td>
+                                                        <td><?= $pecah['nama_pelanggan']; ?></td>
+                                                        <td><?= $pecah['tanggalsewa']; ?></td>
+                                                        <td><?= $pecah['tanggalkembali']; ?></td>
+                                                        <td>
+                                                            <?php
+
+                                                            $denda = 5000;
+                                                            $tgl_dateline = $pecah['tanggalkembali'];
+                                                            $tgl_kembali = date('Y-m-d');
+
+                                                            //hitung selisih hari
+                                                            $lambat = terlambat($tgl_dateline, $tgl_kembali);
+                                                            $denda1 = $lambat * $denda;
+                                                            ?>
+                                                            <?php
+                                                            if ($lambat > 0) {
+                                                            ?>
+                                                                <div style='color:red;'><?= $lambat ?> hari<br> (Rp. <?= number_format($denda1) ?>)</div>
+                                                            <?php
+                                                            } else {
+                                                                echo "Tidak terlambat";
+                                                            }
+                                                            ?>
+                                                        </td>
+                                                        <td><?= $pecah['status']; ?></td>
+                                                        <td><?= $pecah['total'] + $denda1; ?></td>
+                                                        <td>
+                                                            <a href="?p=transaksi&aksi=detail&idsewa=<?= $pecah["idsewa"]; ?>" class="btn btn-success btn-sm"><i class="fas fa-info mr-2"></i>Detail Penyewaan</a>
+                                                        </td>
+                                                    </tr>
+                                                <?php } ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     <?php

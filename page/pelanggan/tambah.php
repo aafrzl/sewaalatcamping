@@ -5,7 +5,7 @@ if(isset($_POST['tambah'])) {
 	$tgl_lahir = htmlspecialchars($_POST['tgl_lahir']);
 	$jk = htmlspecialchars($_POST['jk']);
 
-    if(empty($nama_pelanggan && $alamat && $tgl_lahir && $jk)) {
+    if(empty($nama && $alamat && $tgl_lahir && $jk)) {
         echo "<script>swal('Pastikan anda sudah mengisi semua formulir', {
             icon: 'error',
         }).then((willUpdate) => {if(willUpdate) {window.location='?p=pelanggan';}} );</script>";

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 01, 2022 at 02:17 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Waktu pembuatan: 02 Jul 2022 pada 02.55
+-- Versi server: 10.4.24-MariaDB
+-- Versi PHP: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_barang`
+-- Struktur dari tabel `tb_barang`
 --
 
 CREATE TABLE `tb_barang` (
@@ -35,11 +35,10 @@ CREATE TABLE `tb_barang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_barang`
+-- Dumping data untuk tabel `tb_barang`
 --
 
 INSERT INTO `tb_barang` (`idbarang`, `namabarang`, `harga`, `jumlah_barang`) VALUES
-(0, 'Consina Extraterestr', 240000, 10),
 (1, 'Great Outdoor Monodo', 150000, 5),
 (2, 'Great Outdoor Sharp ', 100000, 10),
 (3, 'Rock Dinamcs X-Frame', 120000, 5),
@@ -62,10 +61,10 @@ INSERT INTO `tb_barang` (`idbarang`, `namabarang`, `harga`, `jumlah_barang`) VAL
 (20, 'Lafuma Summertime 3/', 240000, 2),
 (21, 'Daypack Consina Lukl', 270000, 4),
 (22, 'Daypack Drone 25 L', 350000, 10),
-(23, 'Deuter Futura 22 L', 310000, 5),
-(24, 'Daypack Consina MC K', 310000, 2),
+(23, 'Deuter Futura 22 L', 310000, 15),
+(24, 'Daypack Consina MC K', 310000, 0),
 (25, 'Daypack Consina Leba', 190000, 5),
-(26, 'Jayagiri BP 40 L', 240000, 20),
+(26, 'Jayagiri BP 40 L', 240000, 18),
 (27, 'Jayagiri Amazon 24 4', 240000, 10),
 (28, 'Jayagiri Amazon 23 4', 240000, 5),
 (29, 'Eiger Gekkota 45 L', 240000, 3),
@@ -95,31 +94,32 @@ INSERT INTO `tb_barang` (`idbarang`, `namabarang`, `harga`, `jumlah_barang`) VAL
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_detailsewa`
+-- Struktur dari tabel `tb_detailsewa`
 --
 
 CREATE TABLE `tb_detailsewa` (
   `iddetailsewa` int(11) NOT NULL,
-  `idsewa` int(11) DEFAULT NULL,
-  `idbarang` int(5) DEFAULT NULL,
+  `idsewa` int(11) NOT NULL,
+  `idbarang` int(5) NOT NULL,
   `jumlah` int(10) NOT NULL,
   `subharga` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_detailsewa`
+-- Dumping data untuk tabel `tb_detailsewa`
 --
 
 INSERT INTO `tb_detailsewa` (`iddetailsewa`, `idsewa`, `idbarang`, `jumlah`, `subharga`) VALUES
 (1, 2, 26, 1, 240000),
 (4, 6, 26, 1, 240000),
 (5, 6, 14, 1, 182000),
-(7, 8, 26, 1, 240000);
+(16, 16, 26, 1, 240000),
+(17, 17, 26, 1, 240000);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_pelanggan`
+-- Struktur dari tabel `tb_pelanggan`
 --
 
 CREATE TABLE `tb_pelanggan` (
@@ -131,22 +131,23 @@ CREATE TABLE `tb_pelanggan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_pelanggan`
+-- Dumping data untuk tabel `tb_pelanggan`
 --
 
 INSERT INTO `tb_pelanggan` (`idpelanggan`, `nama_pelanggan`, `alamat`, `tgl_lahir`, `jk`) VALUES
-(2, 'Muhammad Fauzi Ramdani', 'Jl. Terusan soreang RT03/RW06 Kabupaten Bandung', '1998-03-12', 'L');
+(2, 'Muhammad Fauzi Ramdani', 'Jl. Terusan soreang RT03/RW06 Kabupaten Bandung', '1998-04-12', 'L'),
+(3, 'Ijul Satosi', 'Jl. Terusan Suryani Bandung Kulon', '1998-12-25', 'L');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_penyewaan`
+-- Struktur dari tabel `tb_penyewaan`
 --
 
 CREATE TABLE `tb_penyewaan` (
   `idsewa` int(11) NOT NULL,
-  `iduser` int(11) DEFAULT NULL,
-  `idpelanggan` int(11) DEFAULT NULL,
+  `iduser` int(11) NOT NULL,
+  `idpelanggan` int(11) NOT NULL,
   `tanggalsewa` date NOT NULL,
   `tanggalkembali` date NOT NULL,
   `denda` int(20) NOT NULL,
@@ -155,18 +156,20 @@ CREATE TABLE `tb_penyewaan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_penyewaan`
+-- Dumping data untuk tabel `tb_penyewaan`
 --
 
 INSERT INTO `tb_penyewaan` (`idsewa`, `iduser`, `idpelanggan`, `tanggalsewa`, `tanggalkembali`, `denda`, `total`, `status`) VALUES
 (2, 60, 2, '2022-07-01', '2022-07-04', 0, 240000, 'sewa'),
 (6, 60, 2, '2022-07-01', '2022-07-05', 0, 422000, 'sewa'),
-(8, 60, 2, '2022-05-05', '2022-06-06', 125000, 240000, 'kembali');
+(8, 60, 2, '2022-05-05', '2022-06-06', 130000, 240000, 'kembali'),
+(16, 61, 2, '2022-07-02', '2022-07-05', 0, 240000, 'sewa'),
+(17, 61, 2, '2022-06-30', '2022-07-01', 5000, 245000, 'kembali');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_user`
+-- Struktur dari tabel `tb_user`
 --
 
 CREATE TABLE `tb_user` (
@@ -178,7 +181,7 @@ CREATE TABLE `tb_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_user`
+-- Dumping data untuk tabel `tb_user`
 --
 
 INSERT INTO `tb_user` (`iduser`, `username`, `password`, `nama`, `foto`) VALUES
@@ -190,13 +193,13 @@ INSERT INTO `tb_user` (`iduser`, `username`, `password`, `nama`, `foto`) VALUES
 --
 
 --
--- Indexes for table `tb_barang`
+-- Indeks untuk tabel `tb_barang`
 --
 ALTER TABLE `tb_barang`
   ADD PRIMARY KEY (`idbarang`);
 
 --
--- Indexes for table `tb_detailsewa`
+-- Indeks untuk tabel `tb_detailsewa`
 --
 ALTER TABLE `tb_detailsewa`
   ADD PRIMARY KEY (`iddetailsewa`),
@@ -204,13 +207,13 @@ ALTER TABLE `tb_detailsewa`
   ADD KEY `tb_detailsewa_ibfk_2` (`idsewa`);
 
 --
--- Indexes for table `tb_pelanggan`
+-- Indeks untuk tabel `tb_pelanggan`
 --
 ALTER TABLE `tb_pelanggan`
   ADD PRIMARY KEY (`idpelanggan`);
 
 --
--- Indexes for table `tb_penyewaan`
+-- Indeks untuk tabel `tb_penyewaan`
 --
 ALTER TABLE `tb_penyewaan`
   ADD PRIMARY KEY (`idsewa`),
@@ -218,40 +221,52 @@ ALTER TABLE `tb_penyewaan`
   ADD KEY `iduser` (`iduser`) USING BTREE;
 
 --
--- Indexes for table `tb_user`
+-- Indeks untuk tabel `tb_user`
 --
 ALTER TABLE `tb_user`
   ADD PRIMARY KEY (`iduser`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `tb_detailsewa`
+-- AUTO_INCREMENT untuk tabel `tb_barang`
+--
+ALTER TABLE `tb_barang`
+  MODIFY `idbarang` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+
+--
+-- AUTO_INCREMENT untuk tabel `tb_detailsewa`
 --
 ALTER TABLE `tb_detailsewa`
-  MODIFY `iddetailsewa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `iddetailsewa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT for table `tb_penyewaan`
+-- AUTO_INCREMENT untuk tabel `tb_pelanggan`
+--
+ALTER TABLE `tb_pelanggan`
+  MODIFY `idpelanggan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT untuk tabel `tb_penyewaan`
 --
 ALTER TABLE `tb_penyewaan`
-  MODIFY `idsewa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idsewa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `tb_detailsewa`
+-- Ketidakleluasaan untuk tabel `tb_detailsewa`
 --
 ALTER TABLE `tb_detailsewa`
   ADD CONSTRAINT `tb_detailsewa_ibfk_1` FOREIGN KEY (`idbarang`) REFERENCES `tb_barang` (`idbarang`),
   ADD CONSTRAINT `tb_detailsewa_ibfk_2` FOREIGN KEY (`idsewa`) REFERENCES `tb_penyewaan` (`idsewa`);
 
 --
--- Constraints for table `tb_penyewaan`
+-- Ketidakleluasaan untuk tabel `tb_penyewaan`
 --
 ALTER TABLE `tb_penyewaan`
   ADD CONSTRAINT `tb_penyewaan_ibfk_1` FOREIGN KEY (`idpelanggan`) REFERENCES `tb_pelanggan` (`idpelanggan`),
